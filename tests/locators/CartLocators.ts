@@ -32,15 +32,15 @@ subscriptionSuccessMessage =
 firstProduct =
     "(//div[@class='product-image-wrapper'])[1]";
 
-// TC12 Step 11 - First product Add to cart button
-firstProductAddToCart =
+// TC12 Step 11 - First product Add to cart button  hover
+firstProductAddToCart = 
     "(//div[@class='product-overlay']//a[contains(text(),'Add to cart')])[1]";
 
 // TC12 Step 6 - Continue Shopping button
 continueShoppingButton =
     "//button[contains(text(),'Continue Shopping')]";
 
-// TC12 Step 7 - Second product
+// TC12 Step 7 - Second product hover 
 secondProduct =
     "(//div[@class='product-image-wrapper'])[2]";
 
