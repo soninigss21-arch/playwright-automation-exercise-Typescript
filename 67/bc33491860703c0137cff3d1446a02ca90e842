@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "67bc33491860703c0137cff3d1446a02ca90e842",
+  "prompts": {},
+  "humans": {
+    "h_e6b753334b2888": {
+      "author": "soninigss21-arch <soninigss21@gmail.com>"
+    }
+  }
+}
