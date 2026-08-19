@@ -1,0 +1,17 @@
+tests/locators/CartLocators.ts
+  h_e6b753334b2888 35,43
+  h_e6b753334b2888 36
+tests/tests/Products.spec.ts
+  h_e6b753334b2888 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "abff4cd81e354cb82a0a190d24fff6a68438b6a1",
+  "prompts": {},
+  "humans": {
+    "h_e6b753334b2888": {
+      "author": "soninigss21-arch <soninigss21@gmail.com>"
+    }
+  }
+}
