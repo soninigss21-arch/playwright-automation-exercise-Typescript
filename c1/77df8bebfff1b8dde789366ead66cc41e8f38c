@@ -1,0 +1,80 @@
+.github/workflows/playwright.yml
+  h_e6b753334b2888 1-27
+.gitignore
+  h_e6b753334b2888 1-8
+package-lock.json
+  h_e6b753334b2888 1-97
+package.json
+  h_e6b753334b2888 1-15
+playwright.config.ts
+  h_e6b753334b2888 1-84
+tests/example.spec.ts
+  h_e6b753334b2888 1-18
+tests/locators/CartLocators.ts
+  h_e6b753334b2888 1-165
+tests/locators/ContactLocators.ts
+  h_e6b753334b2888 1-42
+tests/locators/HomeLocators.ts
+  h_e6b753334b2888 1-29
+tests/locators/LoginLocators.ts
+  h_e6b753334b2888 1-46
+tests/locators/OrderLocators.ts
+  h_e6b753334b2888 1-171
+tests/locators/ProductsLocators.ts
+  h_e6b753334b2888 1-161
+tests/locators/RegisterLocators.ts
+  h_e6b753334b2888 1-70
+tests/locators/TastCasesLocators.ts
+  h_e6b753334b2888 1-14
+tests/login.spec.ts
+  h_e6b753334b2888 1-5
+tests/pages/CartPages.ts
+  h_e6b753334b2888 1-325
+tests/pages/ContactPages.ts
+  h_e6b753334b2888 1-130
+tests/pages/HomePages.ts
+  h_e6b753334b2888 1-91
+tests/pages/LoginPages.ts
+  h_e6b753334b2888 1-141
+tests/pages/OrderPages.ts
+  h_e6b753334b2888 1-349
+tests/pages/RegisterPages.ts
+  h_e6b753334b2888 1-187
+tests/pages/TastCasesPages.ts
+  h_e6b753334b2888 1-43
+tests/pages/productsPages.ts
+  h_e6b753334b2888 1-350
+tests/tests/Cart.spec.ts
+  h_e6b753334b2888 1-148
+tests/tests/Contact.spec.ts
+  h_e6b753334b2888 1-60
+tests/tests/Home.spec.ts
+  h_e6b753334b2888 1-86
+tests/tests/Logintests.spec.ts
+  h_e6b753334b2888 1-132
+tests/tests/Order.spec.ts
+  h_e6b753334b2888 1-583
+tests/tests/Products.spec.ts
+  h_e6b753334b2888 1-264
+tests/tests/Register.spec.ts
+  h_e6b753334b2888 1-103
+tests/tests/TestCases.spec.ts
+  h_e6b753334b2888 1-23
+tests/tests/test-data/contact.txt
+  h_e6b753334b2888 1
+tests/utils/CommanMethods.ts
+  h_e6b753334b2888 1-67
+tests/utils/Data.ts
+  h_e6b753334b2888 1-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c177df8bebfff1b8dde789366ead66cc41e8f38c",
+  "prompts": {},
+  "humans": {
+    "h_e6b753334b2888": {
+      "author": "soninigss21-arch <soninigss21@gmail.com>"
+    }
+  }
+}
