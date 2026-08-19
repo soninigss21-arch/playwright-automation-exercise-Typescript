@@ -555,7 +555,7 @@ await orderPage.enterOrderComment(
     'Please deliver the order carefully.'
 );
 
-// Step 15 - Click Place Order
+// Step 15 - Click Place Order djkfdbfdk 
 await orderPage.clickPlaceOrder();
 // Step 16 - Enter Payment Details
 await orderPage.enterPaymentDetails(
