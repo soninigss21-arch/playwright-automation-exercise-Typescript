@@ -25,5 +25,5 @@ scrollUpArrow =
 
     // TC25 Step 7 - Top page text
 fullFledgedText =
-    "//*[contains(text(),'Full-Fledged practice website for Automation Engineers')]";
+    "//div[contains(@class,'item') and contains(@class,'active')]//h2[contains(normalize-space(),'Full-Fledged practice website for Automation Engineers')]";
 }

@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { CommonMethods } from '../utils/CommanMethods';
+import { CommonMethods } from '../utils/CommonMethods';
 import { LoginLocators } from '../locators/LoginLocators';
 
 export class LoginPage {
@@ -40,17 +40,11 @@ export class LoginPage {
     // =========================================================
 
     async clickSignupLogin() {
-
-        await this.commonMethods.clickElement(
-            this.loginLocators.signupLoginButton
-        );
+        await this.commonMethods.clickElement(this.loginLocators.signupLoginButton);
     }
 
     async verifyLoginToAccountVisible() {
-
-        await this.commonMethods.verifyElementVisible(
-            this.loginLocators.loginToAccountText
-        );
+        await this.commonMethods.verifyElementVisible(this.loginLocators.loginToAccountText);
     }
 
     async enterLoginDetails(

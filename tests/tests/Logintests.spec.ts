@@ -9,7 +9,7 @@ test.describe('Login Test Cases', () => {
     // Login User with correct email and password
     // =========================================================
 
-    test('Test Case 2 - Login User with correct email and password', async ({ page }) => {
+    test('Test Case 2 - Login User with correct email and password @smoke', async ({ page }) => {
 
         const loginPage = new LoginPage(page);
 
@@ -30,8 +30,8 @@ test.describe('Login Test Cases', () => {
 
         // Step 6 - Enter correct email and password
         await loginPage.enterLoginDetails(
-            'virat1818@gmail.com',
-            'virat1818'
+            LoginData.correctEmail,
+            LoginData.correctPassword
         );
 
         // Step 7 - Click Login
@@ -53,7 +53,7 @@ test.describe('Login Test Cases', () => {
     // Login User with incorrect email and password
     // =========================================================
 
-    test('Test Case 3 - Login User with incorrect email and password', async ({ page }) => {
+    test('Test Case 3 - Login User with incorrect email and password @smoke', async ({ page }) => {
 
         const loginPage = new LoginPage(page);
 
@@ -74,8 +74,8 @@ test.describe('Login Test Cases', () => {
 
         // Step 6 - Enter incorrect email and password
         await loginPage.enterLoginDetails(
-            'wrongemail123@gmail.com',
-            'WrongPassword123',
+            LoginData.incorrectEmail,
+            LoginData.incorrectPassword
         );
 
         // Step 7 - Click Login
@@ -112,15 +112,15 @@ test.describe('Login Test Cases', () => {
 
         // Step 6 - Enter correct email and password
         await loginPage.enterLoginDetails(
-            'virat1818@gmail.com',
-            'virat1818'
+            LoginData.correctEmail,
+            LoginData.correctPassword
         );
 
         // Step 7 - Click Login
         await loginPage.clickLogin();
 
         // Step 8 - Verify Logged in as username
-        // await loginPage.verifyLoggedInAs();
+         await loginPage.verifyLoggedInAs();
 
         // Step 9 - Click Logout
         await loginPage.clickLogout();

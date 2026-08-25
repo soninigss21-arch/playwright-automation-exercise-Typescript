@@ -1,18 +1,15 @@
 import { test } from '@playwright/test';
 import { RegisterPage } from '../pages/RegisterPages';
-import { RegisterData } from '../utils/Data';
-
+import { RegisterData, LoginData } from '../utils/Data';
 
 test('Test Case 1 - Register User', async ({ page }) => {
 
     const registerPage = new RegisterPage(page);
 
-    // Every test run gets a NEW email
-    const email = RegisterData.email;
+    // Generate email only once for this test
+    const email = RegisterData.generateEmail();
 
-    console.log("Register Email:", email);
-    console.log("Register Password:", RegisterData.password);
-
+    console.log('Register Email:', email);
 
     await registerPage.gotoRegisterPage();
 
@@ -22,10 +19,9 @@ test('Test Case 1 - Register User', async ({ page }) => {
 
     await registerPage.verifyNewUserSignupVisible();
 
-    // Enter unique name and email
     await registerPage.enterName(RegisterData.name);
-    await registerPage.enterEmail(email);
 
+    await registerPage.enterEmail(email);
 
     await registerPage.clickSignupButton();
 
@@ -33,35 +29,60 @@ test('Test Case 1 - Register User', async ({ page }) => {
 
     await registerPage.selectTitle();
 
-    await registerPage.enterPassword("tom000");
+    await registerPage.enterPassword(
+        RegisterData.password
+    );
 
-    await registerPage.selectDateOfBirth("10", "5", "1998");
+    await registerPage.selectDateOfBirth(
+        RegisterData.day,
+        RegisterData.month,
+        RegisterData.year
+    );
 
     await registerPage.selectNewsletter();
 
     await registerPage.selectSpecialOffers();
 
-    await registerPage.enterFirstName("Don");
+    await registerPage.enterFirstName(
+        RegisterData.firstName
+    );
 
-    await registerPage.enterLastName("soni");
+    await registerPage.enterLastName(
+        RegisterData.lastName
+    );
 
-    await registerPage.enterCompany("ABC Technologies");
+    await registerPage.enterCompany(
+        RegisterData.company
+    );
 
-    await registerPage.enterAddress("123 Main Street");
+    await registerPage.enterAddress(
+        RegisterData.address
+    );
 
-    await registerPage.selectCountry("India");
+    await registerPage.selectCountry(
+        RegisterData.country
+    );
 
-    await registerPage.enterState("Gujarat");
+    await registerPage.enterState(
+        RegisterData.state
+    );
 
-    await registerPage.enterCity("Mahesana");
+    await registerPage.enterCity(
+        RegisterData.city
+    );
 
-    await registerPage.enterZipcode("400001");
+    await registerPage.enterZipcode(
+        RegisterData.zipcode
+    );
 
-    await registerPage.enterMobileNumber("9876543210");
+    await registerPage.enterMobileNumber(
+        RegisterData.mobileNumber
+    );
 
     await registerPage.clickCreateAccount();
 
-
+    // Final verification
+    await registerPage.verifyAccountCreated();
 });
 
 
@@ -88,10 +109,10 @@ test('Test Case 5 - Register User with existing email', async ({ page }) => {
     await registerPage.verifyNewUserSignupVisible();
 
     // Step 6 - Enter name and ALREADY REGISTERED email
-    await registerPage.enterName('Nigss');
+    await registerPage.enterName(RegisterData.name);
 
     await registerPage.enterEmail(
-        'virat1818@gmail.com'
+        LoginData.correctEmail
     );
 
     // Step 7 - Click Signup

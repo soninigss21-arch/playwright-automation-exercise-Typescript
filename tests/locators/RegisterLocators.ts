@@ -58,6 +58,10 @@ continueButton = "//a[@data-qa='continue-button']";
 // TC14 Step 11 - Logged in as username
 loggedInAsText = "//a[contains(.,'Logged in as')]";
 
+
+
+
+}
 // // TC14 Step 19 - Delete Account
 // deleteAccountButton =
 //     "//a[contains(.,'Delete Account')]";
@@ -65,6 +69,3 @@ loggedInAsText = "//a[contains(.,'Logged in as')]";
 //     // TC14 Step 20 - Account Deleted text
 // accountDeletedText =
 //     "//h2[@data-qa='account-deleted']";
-
-
-}

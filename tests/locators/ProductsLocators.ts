@@ -16,7 +16,7 @@ homePageText =
    
 
 
-         // =========================================================
+    // =========================================================
     // PRODUCT DETAIL
     // =========================================================
 
@@ -120,8 +120,15 @@ allProductsText =
     "//div[@class='features_items']//div[@class='productinfo text-center']//a[contains(@class,'add-to-cart')]"; 
 
     // TC20 Step 9 - Products in cart
+    cartModal =
+        "//div[@id='cartModal']";
+
+    continueShoppingButton =
+    "//div[@id='cartModal']//button[normalize-space()='Continue Shopping']";
+
     cartProductRows =
-        "//table[@id='cart_info_table']/tbody/tr";
+    "//table[@id='cart_info_table']/tbody/tr";
+    
 
         // TC21 Step 5 - First View Product
 firstViewProduct =
@@ -153,7 +160,7 @@ recommendedItemsText =
 
     // TC22 Step 5 - First Recommended Product Add to Cart
 recommendedAddToCartButton =
-    "(//div[@id='recommended-item-carousel']//a[contains(@class,'add-to-cart')])[1]";
+    "(//div[@id='recommended-item-carousel']//div[contains(@class,'item') and contains(@class,'active')]//a[contains(@class,'add-to-cart')])[1]";
 
     
 

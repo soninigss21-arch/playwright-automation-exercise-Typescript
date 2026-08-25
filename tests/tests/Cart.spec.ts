@@ -1,8 +1,9 @@
 import { test } from '@playwright/test';
 import { HomePage } from '../pages/HomePages';
 import { CartPage } from '../pages/CartPages';
+import { CartData } from '../utils/Data';
 
-test('Test Case 11 - Add Products in Cart', async ({ page }) => {
+test('Test Case 11 - Add Products in Cart @smoke', async ({ page }) => {
 
     const homePage = new HomePage(page);
     const cartPage = new CartPage(page);
@@ -24,8 +25,11 @@ await cartPage.scrollToFooter();
 await cartPage.verifySubscriptionVisible();
 
 // Step 7 - Enter subscription email
-await cartPage.enterSubscriptionEmail(
-    'virat1818@gmail.com'
+const subscriptionEmail =
+    CartData.generateSubscriptionEmail();
+
+    await cartPage.enterSubscriptionEmail(
+    subscriptionEmail
 );
 
 // Step 7 - Click arrow button
@@ -36,7 +40,7 @@ await cartPage.verifySubscriptionSuccessMessage();
 
 });
 
-test('Test Case 12 - Add Products in Cart', async ({ page }) => {
+test('Test Case 12 - Add Products in Cart @smoke', async ({ page }) => {
 
     const homePage = new HomePage(page);
     const cartPage = new CartPage(page);
@@ -46,7 +50,8 @@ test('Test Case 12 - Add Products in Cart', async ({ page }) => {
     // Step 2 - Navigate to URL
     await homePage.navigateToHomePage();
 
-    // Step 3 - Verify home page    await homePage.verifyHomePageVisible();
+    // Step 3 - Verify home page    
+    await homePage.verifyHomePageVisible();
 
     // Step 4 - Click Products button
     await cartPage.clickProducts();
@@ -73,11 +78,18 @@ test('Test Case 12 - Add Products in Cart', async ({ page }) => {
     await cartPage.verifyBothProductsInCart();
 
     // Step 10 - Verify price, quantity and total price
-    await cartPage.verifyProductDetails();
+    await cartPage.verifyProductDetails(
+    CartData.firstProductPrice,
+    CartData.firstProductQuantity,
+    CartData.firstProductTotal,
+    CartData.secondProductPrice,
+    CartData.secondProductQuantity,
+    CartData.secondProductTotal
+    );
 
 });
 
- test('Test Case 13 - Verify Product quantity in Cart', async ({ page }) => {
+ test('Test Case 13 - Verify Product quantity in Cart @smoke', async ({ page }) => {
 
     const homePage = new HomePage(page);
     const cartPage = new CartPage(page);
@@ -97,7 +109,9 @@ test('Test Case 12 - Add Products in Cart', async ({ page }) => {
     await cartPage.verifyProductDetailOpened();
 
    // Step 6 - Increase quantity to 4
-    await cartPage.increaseQuantityToFour();
+    await cartPage.enterProductQuantity(
+    CartData.selectedProductQuantity
+);
 
     // Step 7 - Click Add to cart
     await cartPage.clickProductDetailAddToCart();
@@ -106,10 +120,12 @@ test('Test Case 12 - Add Products in Cart', async ({ page }) => {
     await cartPage.clickViewCart();
 
     // Step 9 - Verify product quantity is exactly 1
-    await cartPage.verifyProductQuantity();
+    await cartPage.verifyProductQuantity(
+    CartData.selectedProductQuantity
+);
 });
 
-test('Test Case 17 - Remove Products From Cart', async ({ page }) => {
+test('Test Case 17 - Remove Products From Cart @smoke', async ({ page }) => {
 
     // Step 1 - Launch browser
     const homePage = new HomePage(page);

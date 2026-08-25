@@ -1,7 +1,6 @@
-import { Page, expect } from '@playwright/test';
-import { CommonMethods } from '../utils/CommanMethods';
+import { Page } from '@playwright/test';
+import { CommonMethods } from '../utils/CommonMethods';
 import { RegisterLocators } from '../locators/RegisterLocators';
-
 
 export class RegisterPage {
 
@@ -10,155 +9,203 @@ export class RegisterPage {
     readonly registerLocators: RegisterLocators;
 
     constructor(page: Page) {
-
         this.page = page;
-
         this.commonMethods = new CommonMethods(page);
-
         this.registerLocators = new RegisterLocators();
     }
 
     async gotoRegisterPage() {
-        await this.page.goto('http://automationexercise.com');
+        await this.commonMethods.navigateTo(
+            'https://automationexercise.com'
+        );
     }
 
     async verifyHomePageVisible() {
-        await expect(
-            this.page.locator(this.registerLocators.homePageLogo)
-        ).toBeVisible();
+        await this.commonMethods.verifyElementVisible(
+            this.registerLocators.homePageLogo
+        );
     }
 
     async clickSignupLogin() {
-        // Use Playwright page click directly since CommonMethods has no clickElement
-        await this.page.click(this.registerLocators.signupLoginButton);
+        await this.commonMethods.clickElement(
+            this.registerLocators.signupLoginButton
+        );
     }
 
     async verifyNewUserSignupVisible() {
-        await expect(
-            this.page.locator(this.registerLocators.newUserSignupText)
-        ).toBeVisible();
+        await this.commonMethods.verifyElementVisible(
+            this.registerLocators.newUserSignupText
+        );
     }
 
     async enterName(name: string) {
-        await this.page.fill(this.registerLocators.nameInput, name);
+        await this.commonMethods.fillElement(
+            this.registerLocators.nameInput,
+            name
+        );
     }
 
     async enterEmail(email: string) {
-        await this.page.fill(this.registerLocators.emailInput, email);
+        await this.commonMethods.fillElement(
+            this.registerLocators.emailInput,
+            email
+        );
     }
 
     async clickSignupButton() {
-    await this.commonMethods.clickElement(
-        this.registerLocators.signupButton
-    );
+        await this.commonMethods.clickElement(
+            this.registerLocators.signupButton
+        );
     }
 
-      async verifyAccountInformationVisible() {
-      await expect(
-          this.page.locator(this.registerLocators.accountInformationText)
-      ).toBeVisible();
-      }
+    async verifyAccountInformationVisible() {
+        await this.commonMethods.verifyElementVisible(
+            this.registerLocators.accountInformationText
+        );
+    }
 
     async selectTitle() {
-    await this.page
-    .locator(this.registerLocators.TitleMr)
-    .check();
-}
+        await this.commonMethods.checkElement(
+            this.registerLocators.TitleMr
+        );
+    }
 
     async enterPassword(password: string) {
-    await this.page.locator(this.registerLocators.Password).fill(password);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.Password,
+            password
+        );
+    }
 
-    async selectDateOfBirth(day: string, month: string, year: string) {
-    await this.page.locator(this.registerLocators.DateOfBirthDay).selectOption(day);
-    await this.page.locator(this.registerLocators.DateOfBirthMonth).selectOption(month);
-    await this.page.locator(this.registerLocators.DateOfBirthYear).selectOption(year);
-}
+    async selectDateOfBirth(
+        day: string,
+        month: string,
+        year: string
+    ) {
+        await this.commonMethods.selectOption(
+            this.registerLocators.DateOfBirthDay,
+            day
+        );
+
+        await this.commonMethods.selectOption(
+            this.registerLocators.DateOfBirthMonth,
+            month
+        );
+
+        await this.commonMethods.selectOption(
+            this.registerLocators.DateOfBirthYear,
+            year
+        );
+    }
+
     async selectNewsletter() {
-        await this.page.locator(this.registerLocators.Newsletter).check();
-}
+        await this.commonMethods.checkElement(
+            this.registerLocators.Newsletter
+        );
+    }
 
     async selectSpecialOffers() {
-    await this.page.locator(this.registerLocators.SpecialOffers).check();
-}
+        await this.commonMethods.checkElement(
+            this.registerLocators.SpecialOffers
+        );
+    }
 
     async enterFirstName(firstName: string) {
-    await this.page.locator(this.registerLocators.FirstName).fill(firstName);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.FirstName,
+            firstName
+        );
+    }
+
     async enterLastName(lastName: string) {
-    await this.page.locator(this.registerLocators.LastName).fill(lastName);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.LastName,
+            lastName
+        );
+    }
 
     async enterCompany(company: string) {
-    await this.page.locator(this.registerLocators.Company).fill(company);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.Company,
+            company
+        );
+    }
 
-    async enterAddress(address:string) {
-    await this.page.locator(this.registerLocators.Address).fill(address);
-}
+    async enterAddress(address: string) {
+        await this.commonMethods.fillElement(
+            this.registerLocators.Address,
+            address
+        );
+    }
 
     async selectCountry(country: string) {
-    await this.page.locator(this.registerLocators.Country).selectOption({ label: country });
-}
+        await this.commonMethods.selectOptionByLabel(
+            this.registerLocators.Country,
+            country
+        );
+    }
 
     async enterState(state: string) {
-    await this.page.locator(this.registerLocators.State).fill(state);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.State,
+            state
+        );
+    }
 
     async enterCity(city: string) {
-    await this.page.locator(this.registerLocators.City).fill(city);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.City,
+            city
+        );
+    }
 
     async enterZipcode(zipcode: string) {
-    await this.page.locator(this.registerLocators.Zipcode).fill(zipcode);
-}
+        await this.commonMethods.fillElement(
+            this.registerLocators.Zipcode,
+            zipcode
+        );
+    }
 
     async enterMobileNumber(mobileNumber: string) {
-    await this.page.locator(this.registerLocators.MobileNumber).fill(mobileNumber);
-}
-
-// CREATE ACCOUNT
+        await this.commonMethods.fillElement(
+            this.registerLocators.MobileNumber,
+            mobileNumber
+        );
+    }
 
     async clickCreateAccount() {
-    await this.page.locator(this.registerLocators.CreateAccount).click();
-}
+        await this.commonMethods.clickElement(
+            this.registerLocators.CreateAccount
+        );
+    }
 
-// =========================================================
-// TC5 - EXISTING EMAIL
-// =========================================================
+    // =========================================================
+    // TC5 - EXISTING EMAIL
+    // =========================================================
 
-async verifyEmailAlreadyExistVisible() {
-    await expect(
-        this.page.locator(
+    async verifyEmailAlreadyExistVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.registerLocators.emailAlreadyExistText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-
-// TC14 Step 10 - Verify ACCOUNT CREATED!
-async verifyAccountCreated() {
-    await expect(
-        this.page.locator(
+    async verifyAccountCreated() {
+        await this.commonMethods.verifyElementVisible(
             this.registerLocators.accountCreatedText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC14 Step 10 - Click Continue
-async clickContinueButton() {
-    await this.page.locator(
+    async clickContinueButton() {
+    await this.commonMethods.dispatchClickElement(
         this.registerLocators.continueButton
-    ).click();
+    );
 }
 
-// TC14 Step 11 - Verify Logged in as username
-async verifyLoggedInAsUser() {
-    await expect(
-        this.page.locator(
+    async verifyLoggedInAsUser() {
+        await this.commonMethods.verifyElementVisible(
             this.registerLocators.loggedInAsText
-        )
-    ).toBeVisible();
+        );
+    }
 }
 
 // // TC14 Step 19 - Click Delete Account
@@ -183,5 +230,3 @@ async verifyLoggedInAsUser() {
 
 
 
-
-}

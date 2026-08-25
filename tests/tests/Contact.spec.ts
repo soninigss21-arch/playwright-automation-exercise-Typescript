@@ -2,10 +2,12 @@
 import { test } from '@playwright/test';
 import * as path from 'path';
 import { ContactPage } from '../pages/ContactPages';
+import { ContactData } from '../utils/Data';
+
 
 declare const process: { cwd(): string };
 
-test('Test Case 6 - Contact Us Form', async ({ page }) => {
+test('Test Case 6 - Contact Us Form @smoke', async ({ page }) => {
 
     const contactPage = new ContactPage(page);
 
@@ -28,10 +30,10 @@ test('Test Case 6 - Contact Us Form', async ({ page }) => {
 
     // Step 6 - Enter name, email, subject and message
     await contactPage.enterContactDetails(
-        'Nigss',
-        'nigss999@gmail.com',
-        'Test Subject',
-        'This is a test message for Contact Us form.'
+        ContactData.name,
+        ContactData.email,
+        ContactData.subject,
+        ContactData.message
     );
 
     // Step 7 - Upload file
@@ -46,15 +48,14 @@ test('Test Case 6 - Contact Us Form', async ({ page }) => {
     await contactPage.uploadFile(filePath);
 
 
-    // Step 8 - Click Submit
-    await contactPage.clickSubmit();
+    // Steps 8 and 9 - Submit and accept dialog
+    await contactPage.clickSubmitAndAcceptDialog();
 
-    // // Step 10 - Verify success message
-    // await contactPage.verifySuccessMessageVisible();
+    // Step 10 - Verify success message
+    await contactPage.verifySuccessMessage();
 
-    // Step 11 - Click Home
-    //await contactPage.clickHome();
+    // Step 11 - Return to Home page
+    await contactPage.clickHomeButton();
+    await contactPage.verifyReturnedToHomePage();
 
-    // Verify landed on Home Page
-    //await contactPage.verifyLandedOnHomePage();
 });

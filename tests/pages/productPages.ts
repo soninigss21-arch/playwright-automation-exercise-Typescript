@@ -1,14 +1,18 @@
 import { Page, expect } from '@playwright/test';
 import { ProductsLocators } from '../locators/ProductsLocators';
+import { CommonMethods } from '../utils/CommonMethods';
 
 export class ProductsPage {
 
     readonly page: Page;
     readonly productsLocators: ProductsLocators;
+    readonly commonMethods: CommonMethods;
+
 
     constructor(page: Page) {
         this.page = page;
         this.productsLocators = new ProductsLocators();
+        this.commonMethods = new CommonMethods(page);
     }
 
     // =========================================================
@@ -17,334 +21,312 @@ export class ProductsPage {
 
     // Step 2
     async navigateToHomePage() {
-        await this.page.goto('http://automationexercise.com');
+        await this.commonMethods.navigateTo(
+            'https://automationexercise.com'
+        );
     }
 
     // // Step 3
     async verifyHomePageVisible() {
-         await expect(
-             this.page.locator(
-                 this.productsLocators.homePageText
-            )
-        ).toBeVisible();
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.homePageText
+        );
     }
+   async clickProducts() {
+    // Direct event bypasses the third-party Google advertisement
+    await this.commonMethods.dispatchClickElement(
+        this.productsLocators.productsButton
+    );
 
-     // =========================================================
-    // TC8 - PRODUCTS PAGE
+    await this.commonMethods.verifyURL(
+        /\/products\/?(?:[?#].*)?$/
+    );
+}
+
+    // =========================================================
+    // TC8 - PRODUCT DETAILS
     // =========================================================
 
-
-
-
-async verifyProductsListVisible() {
-    await expect(
-        this.page.locator(
+    async verifyProductsListVisible() {
+        await this.commonMethods.verifyFirstElementVisible(
             this.productsLocators.productsList
-        ).first()
-    ).toBeVisible();
-}
+        );
+    }
 
 
 
-async verifyProductDetailPageVisible() {
-    await expect(
-        this.page.locator(
+
+    async verifyProductDetailPageVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.productDetailText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-async verifyProductDetailsVisible() {
-
-    await expect(
-        this.page.locator(
+    async verifyProductDetailsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.productName
-        )
-    ).toBeVisible();
+        );
 
-    await expect(
-        this.page.locator(
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.productCategory
-        )
-    ).toBeVisible();
+        );
 
-    await expect(
-        this.page.locator(
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.productPrice
-        )
-    ).toBeVisible();
+        );
 
-    // await expect(
-    //     this.page.locator(
-    //         this.productsLocators.productAvailability
-    //     )
-    // ).toBeVisible();
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.productAvailability
+        );
 
-    // await expect(
-    //     this.page.locator(
-    //         this.productsLocators.productCondition
-    //     )
-    // ).toBeVisible();
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.productCondition
+        );
 
-    await expect(
-        this.page.locator(
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.productBrand
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
 
     // TC18 Step 3 - Verify Categories visible
-async verifyCategoriesVisible() {
-    await expect(
-        this.page.locator(
+    async verifyCategoriesVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.categoriesText
-        )
-    ).toBeVisible();
-}
+        );
+    }
+
 
 
     // TC18 Step 4 - Click Women Category
-async clickWomenCategory() {
-    await this.page.locator(
-        this.productsLocators.womenCategory
-    ).click();
+    async clickWomenCategory() {
+   await this.commonMethods.clickElement(this.productsLocators.womenCategory);
 }
 
-// TC18 Step 5 - Click Dress Sub-category
-async clickWomenDressCategory() {
-    await this.page.locator(
-        this.productsLocators.womenDressCategory
-    ).click();
+    // TC18 Step 5 - Click Dress Sub-category
+    async clickWomenDressCategory() {
+    await this.commonMethods.clickElement(this.productsLocators.womenDressCategory
+    );
 }
 
-// TC18 Step 6 - Verify Women Dress Products
-async verifyWomenDressProductsVisible() {
-    await expect(
-        this.page.locator(
+
+    // TC18 Step 6 - Verify Women Dress Products
+    async verifyWomenDressProductsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.womenDressProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC18 Step 7 - Click Men Category
-async clickMenCategory() {
-    await this.page.locator(
-        this.productsLocators.menCategory
-    ).click();
-}
+    // TC18 Step 7 - Click Men Category
+    async clickMenCategory() {
+        await this.commonMethods.clickElement(
+            this.productsLocators.menCategory
+        );
+    }
 
-// TC18 Step 7 - Click Men Tshirts
-async clickMenTshirtsCategory() {
-    await this.page.locator(
-        this.productsLocators.menTshirtsCategory
-    ).click();
-}
+    // TC18 Step 7 - Click Men Tshirts
+    async clickMenTshirtsCategory() {
+        await this.commonMethods.clickElement(
+            this.productsLocators.menTshirtsCategory
+        );
+    }
 
-// TC18 Step 8 - Verify Men Tshirts Products page
-async verifyMenTshirtsProductsVisible() {
-    await expect(
-        this.page.locator(
+    // TC18 Step 8 - Verify Men Tshirts Products page
+    async verifyMenTshirtsProductsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.menTshirtsProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
 
 
-// Click Products button
-async clickProducts() {
-    await this.page.locator(
-        this.productsLocators.productsButton
-    ).click();
-}
-// TC19 Step 4 - Verify Brands visible
-async verifyBrandsVisible() {
-    await expect(
-        this.page.locator(
+
+    // TC19 Step 4 - Verify Brands visible
+    async verifyBrandsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.brandsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC19 Step 5 - Click Polo brand
-async clickPoloBrand() {
-    await this.page.locator(
-        this.productsLocators.poloBrand
-    ).click();
-}
+    // TC19 Step 5 - Click Polo brand
+    async clickPoloBrand() {
+        await this.commonMethods.clickElement(
+            this.productsLocators.poloBrand
+        );
+    }
 
-// TC19 Step 6 - Verify Polo brand products page
-async verifyPoloBrandProductsVisible() {
-    await expect(
-        this.page.locator(
+
+    // TC19 Step 6 - Verify Polo brand products page
+    async verifyPoloBrandProductsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.poloBrandProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC19 Step 7 - Click H&M brand
-async clickHMBrand() {
-    await this.page.locator(
-        this.productsLocators.hmBrand
-    ).click();
-}
+    // TC19 Step 7 - Click H&M brand
+    async clickHMBrand() {
+        await this.commonMethods.clickElement(
+            this.productsLocators.hmBrand
+        );
+    }
 
-// TC19 Step 8 - Verify H&M brand products page
-async verifyHMBrandProductsVisible() {
-    await expect(
-        this.page.locator(
+
+    // TC19 Step 8 - Verify H&M brand products page
+    async verifyHMBrandProductsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.hmBrandProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC20 Step 4 - Verify ALL PRODUCTS page
-async verifyAllProductsPageVisible() {
-    await expect(
-        this.page.locator(
+    // TC20 Step 4 - Verify ALL PRODUCTS page
+    async verifyAllProductsPageVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.allProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
 
-// TC20 Step 5 - Search product
-async searchProduct(productName: string) {
-    await this.page.locator(
-        this.productsLocators.searchProductInput
-    ).fill(productName);
+    // TC20 Step 5 - Search product
+    async searchProduct(productName: string) {
+        await this.commonMethods.fillElement(
+            this.productsLocators.searchProductInput,
+            productName
+        );
 
-    await this.page.locator(
-        this.productsLocators.searchProductButton
-    ).click();
-}
+        await this.commonMethods.clickElement(
+            this.productsLocators.searchProductButton
+        );
+    }
 
-// TC20 Step 6 - Verify SEARCHED PRODUCTS
-async verifySearchedProductsVisible() {
-    await expect(
-        this.page.locator(
+    // TC20 Step 6 - Verify SEARCHED PRODUCTS
+    async verifySearchedProductsVisible() {
+        await this.commonMethods.verifyElementVisible(
             this.productsLocators.searchedProductsText
-        )
-    ).toBeVisible();
-}
+        );
+    }
 
-// TC20 Step 7 - Verify searched products are visible
-async verifySearchResultsVisible() {
-    await expect(
-        this.page.locator(
+    // TC20 Step 7 - Verify searched products are visible
+    async verifySearchResultsVisible() {
+        await this.commonMethods.verifyFirstElementVisible(
             this.productsLocators.searchedProductCards
-        ).first()
-    ).toBeVisible();
-}
+        );
+    }
+    // TC20 Step 8 - Add searched products to cart
+    async addSearchedProductsToCart() {
+        const count =
+            await this.commonMethods.getElementCount(
+                this.productsLocators
+                    .searchedProductAddToCartButtons
+            );
 
-// TC20 Step 8 - Add searched products to cart
-async addSearchedProductsToCart() {
+        for (let index = 0; index < count; index++) {
+            await this.commonMethods
+                .dispatchClickElementByIndex(
+                    this.productsLocators
+                        .searchedProductAddToCartButtons,
+                    index
+                );
 
-    const buttons = this.page.locator(
-        this.productsLocators.searchedProductAddToCartButtons
+            await this.commonMethods.verifyElementVisible(
+                this.productsLocators.cartModal
+            );
+
+            await this.commonMethods.clickElement(
+                (this.productsLocators as any).continueShoppingButton
+            );
+
+            await this.commonMethods.verifyElementHidden(
+                this.productsLocators.cartModal
+            );
+        }
+    }
+
+    async verifyProductsVisibleInCart() {
+        await this.commonMethods.verifyFirstElementVisible(
+            (this.productsLocators as any).cartProductRows
+        );
+    }
+
+
+    // TC21 - PRODUCT REVIEW
+    // =========================================================
+
+    async clickFirstViewProduct() {
+        await this.commonMethods.clickElement(
+            this.productsLocators.firstViewProduct
+        );
+    }
+
+    async verifyWriteYourReviewVisible() {
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.writeYourReviewText
+        );
+    }
+
+    async enterReviewDetails(
+        name: string,
+        email: string,
+        review: string
+    ) {
+        await this.commonMethods.fillElement(
+            this.productsLocators.reviewName,
+            name
+        );
+
+        await this.commonMethods.fillElement(
+            this.productsLocators.reviewEmail,
+            email
+        );
+
+        await this.commonMethods.fillElement(
+            this.productsLocators.reviewText,
+            review
+        );
+    }
+
+    async clickSubmitReview() {
+    const submitButton = this.page.locator(
+        this.productsLocators.submitReviewButton
     );
 
-    const count = await buttons.count();
+    await expect(submitButton).toBeVisible();
+    await expect(submitButton).toBeEnabled();
+    await submitButton.click();
+}
 
-    for (let i = 0; i < count; i++) {
+    async verifyReviewSuccessMessage() {
+    const reviewSection = this.page.locator(
+        this.productsLocators.reviewSuccessMessage
+    );
 
-        // Click Add to Cart
-        await buttons.nth(i).click();
+    await expect(reviewSection).toBeVisible({
+        timeout: 15000
+    });
 
-        // Verify modal opened
-        await expect(
-            this.page.locator('#cartModal')
-        ).toBeVisible();
+    await expect(reviewSection).toContainText(
+        'Thank you for your review.'
+    );
+}
 
-        // Click Continue Shopping
-        await this.page
-            .locator('#cartModal')
-            .getByRole('button', { name: 'Continue Shopping' })
-            .click();
+    // =========================================================
+    // TC22 - RECOMMENDED PRODUCT
+    // =========================================================
 
-        // Wait until modal closes
-        await expect(
-            this.page.locator('#cartModal')
-        ).toBeHidden();
+
+    async verifyRecommendedItemsVisible() {
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.recommendedItemsText
+        );
+    }
+
+    async addRecommendedProductToCart() {
+        await this.commonMethods.dispatchClickElement(
+            this.productsLocators.recommendedAddToCartButton
+        );
+
+        await this.commonMethods.verifyElementVisible(
+            this.productsLocators.cartModal
+        );
     }
 }
 
-// TC20 Step 9 - Verify products are visible in cart
-async verifyProductsVisibleInCart() {
-    await expect(
-        this.page.locator(
-            this.productsLocators.cartProductRows
-        ).first()
-    ).toBeVisible();
-}
-
-// TC21 Step 5 - Click first View Product
-async clickFirstViewProduct() {
-    await this.page.locator(
-        this.productsLocators.firstViewProduct
-    ).click();
-}
-
-// TC21 Step 6 - Verify Write Your Review
-async verifyWriteYourReviewVisible() {
-    await expect(
-        this.page.locator(
-            this.productsLocators.writeYourReviewText
-        )
-    ).toBeVisible();
-}
-
-// TC21 Step 7 - Enter review details
-async enterReviewDetails(
-    name: string,
-    email: string,
-    review: string
-) {
-    await this.page.locator(
-        this.productsLocators.reviewName
-    ).fill(name);
-
-    await this.page.locator(
-        this.productsLocators.reviewEmail
-    ).fill(email);
-
-    await this.page.locator(
-        this.productsLocators.reviewText
-    ).fill(review);
-}
-    
-
-// TC21 Step 8 - Click Submit
-async clickSubmitReview() {
-    await this.page.locator(
-        this.productsLocators.submitReviewButton
-    ).click();
-}
-
-// TC21 Step 9 - Verify review success message
-async verifyReviewSuccessMessage() {
-    await expect(
-        this.page.locator(
-            this.productsLocators.reviewSuccessMessage
-        )
-    ).toBeVisible();
-}
-
-// TC22 Step 4 - Verify Recommended Items
-async verifyRecommendedItemsVisible() {
-    await expect(
-        this.page.locator(
-            this.productsLocators.recommendedItemsText
-        )
-    ).toBeVisible();
-}
-// TC22 Step 5 - Add Recommended Product to Cart
-async addRecommendedProductToCart() {
-    await this.page.locator(
-        this.productsLocators.recommendedAddToCartButton
-    ).click();
-}
-
-
-}
