@@ -33,12 +33,12 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      # Execute Playwright tests
-      - name: Run Playwright tests
+      # Execute only the 10 smoke tests
+      - name: Run Playwright smoke tests
         env:
           CI: true
           PLAYWRIGHT_HTML_OPEN: never
-       run: npx playwright test --project=chromium --grep "@smoke" --reporter=html
+        run: npx playwright test --project=chromium --grep "@smoke" --reporter=html
 
       # Create ZIP of the latest report
       - name: Create Playwright report ZIP
@@ -73,11 +73,11 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           from: 'Playwright GitHub Actions <${{ secrets.MAIL_USERNAME }}>'
           to: ${{ secrets.MAIL_TO }}
-          subject: 'Playwright Test Report - ${{ job.status }}'
+          subject: 'Playwright Smoke Test Report - ${{ job.status }}'
           body: |
             Hello,
 
-            Playwright test execution has finished.
+            Playwright smoke test execution has finished.
 
             Repository: ${{ github.repository }}
             Branch: ${{ github.ref_name }}
@@ -87,5 +87,5 @@ jobs:
             GitHub Actions URL:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            The latest Playwright HTML report is attached.
+            The HTML report for the 10 smoke tests is attached.
           attachments: playwright-report.zip
