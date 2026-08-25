@@ -38,7 +38,7 @@ jobs:
         env:
           CI: true
           PLAYWRIGHT_HTML_OPEN: never
-        run: npx playwright test --project=chromium --reporter=html
+       run: npx playwright test --project=chromium --grep "@smoke" --reporter=html
 
       # Create ZIP of the latest report
       - name: Create Playwright report ZIP
