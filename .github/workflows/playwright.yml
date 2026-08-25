@@ -115,4 +115,4 @@ jobs:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
             The latest Playwright HTML report is attached.
-          attachments: playwright-report.zip
+            attachments: playwright-report/index.html
