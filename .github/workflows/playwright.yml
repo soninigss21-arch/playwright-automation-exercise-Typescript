@@ -9,20 +9,11 @@ on:
 
   workflow_dispatch:
     inputs:
-      test_file:
-        description: Select the test file
+      test_target:
+        description: 'Enter file name or tag, for example: Cart.spec.ts or @smoke'
         required: true
-        default: Cart.spec.ts
-        type: choice
-        options:
-          - Cart.spec.ts
-          - Contact.spec.ts
-          - Home.spec.ts
-          - Logintests.spec.ts
-          - Order.spec.ts
-          - Products.spec.ts
-          - Register.spec.ts
-          - TestCases.spec.ts
+        default: '@smoke'
+        type: string
         
 
 jobs:
@@ -49,14 +40,25 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-            # Manual run: execute only the selected file
-      - name: Run selected Playwright file
+                  # Manual execution: run the entered file name or tag
+      - name: Run selected Playwright file or tag
         if: github.event_name == 'workflow_dispatch'
         env:
           CI: true
           PLAYWRIGHT_HTML_OPEN: never
-          TEST_FILE: ${{ inputs.test_file }}
-        run: npx playwright test "tests/tests/$TEST_FILE" --project=chromium --reporter=html
+          TEST_TARGET: ${{ inputs.test_target }}
+        run: |
+          if [[ "$TEST_TARGET" == @* ]]; then
+            echo "Running tests with tag: $TEST_TARGET"
+            npx playwright test --project=chromium --grep "$TEST_TARGET" --reporter=html
+          elif [[ "$TEST_TARGET" == *.spec.ts ]]; then
+            echo "Running test file: $TEST_TARGET"
+            npx playwright test "tests/tests/$TEST_TARGET" --project=chromium --reporter=html
+          else
+            echo "Invalid input: $TEST_TARGET"
+            echo "Enter a file like Cart.spec.ts or a tag like @smoke"
+            exit 1
+          fi
 
       # Automatic push/PR: execute the 10 smoke tests
       - name: Run Playwright smoke tests
