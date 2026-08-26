@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       test_target:
-        description: 'Enter file name or tag, for example: Cart.spec.ts or @smoke'
+        description: 'Enter Nane or Tags:'
         required: true
         default: '@smoke'
         type: string
