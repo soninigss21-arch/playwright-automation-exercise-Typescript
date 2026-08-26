@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [main, master]
 
+    # Run automatically every day at 5:30 PM India time
+  schedule:
+    - cron: '00 18 * * *'
+      timezone: 'Asia/Kolkata'
+
   workflow_dispatch:
     inputs:
       test_target:
