@@ -1,20 +1,13 @@
 name: Playwright Tests
 
 on:
-  # Automatically run on every branch
-  push:
-    branches: ['**']
-
-  pull_request:
-    branches: ['**']
-
-  # Manually enter a file name or tag
+  
   workflow_dispatch:
     inputs:
       test_target:
-        description: 'Enter file name or tag, for example: Cart.spec.ts or @smoke'
+        description: 'Enter file name or tag:
         required: true
-        default: '@smoke'
+        default: ''
         type: string
 
 jobs:
