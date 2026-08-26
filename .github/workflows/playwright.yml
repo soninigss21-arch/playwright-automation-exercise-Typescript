@@ -9,7 +9,7 @@ on:
 
     # Run automatically every day at 5:30 PM India time
   schedule:
-    - cron: '11 18 * * *'
+    - cron: '20 18 * * *'
       timezone: 'Asia/Kolkata'
 
   workflow_dispatch:
